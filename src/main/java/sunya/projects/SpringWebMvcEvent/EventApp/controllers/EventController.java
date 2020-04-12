@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import sunya.projects.SpringWebMvcEvent.EventApp.models.Event;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,9 +16,9 @@ import java.util.List;
 @RequestMapping("events")
 public class EventController {
 
-    private static List<String> events = new ArrayList<>(Arrays.asList(
-            "Wake up early",
-            "Breakfast with disney plus"
+    private static List<Event> events = new ArrayList<>(Arrays.asList(
+            new Event("Wake up early"),
+            new Event("Breakfast with disney plus")
     ));
 
     @GetMapping("")
@@ -33,7 +34,7 @@ public class EventController {
 
     @PostMapping("create")
     public String processNewEventCreated(@RequestParam(required = false) String eventName, Model model) {
-        events.add(eventName);
+        events.add(new Event(eventName));
         return "redirect:";
     }
 
